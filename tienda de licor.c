@@ -127,19 +127,19 @@ void agregar(Licor producto[], int *tam, int *ser){
           printf("\nIngresa los grados de alcohol que contiene: ");
           o=scanf("%f", &producto[*tam].grados);
           fflush(stdin);   // cleanStdIn
-        } while(o != 1); 
+        } while(o != 1 || producto[*tam].grados<0); 
         do
         {
           printf("\nIngresa de cuantos litros es el producto: ");
           u=scanf("%f", &producto[*tam].volumen);
           fflush(stdin);   // cleanStdIn
-        } while (u != 1);
+        } while (u != 1 || producto[*tam].volumen<0);
         do
         {
           printf("\nIngresa el precio que tendra el articulo: ");
           t=scanf("%f", &producto[*tam].precio);
           fflush(stdin);   // cleanStdIn
-        } while (t !=1);
+        } while (t !=1 || producto[*tam].precio<0);
         printf("\nEl numero serial del producto es: %d\n ", *ser);
         producto[*tam].serial=*ser;
         *ser=*ser+1;
@@ -148,7 +148,7 @@ void agregar(Licor producto[], int *tam, int *ser){
           printf("\nIngresa cuantos de este tipo vas a agregar: ");
           p=scanf("%d", &producto[*tam].cantidad);
           fflush(stdin);   // cleanStdIn
-        } while (p != 1);
+        } while (p != 1 || producto[*tam].cantidad<0);
         *tam=*tam+1;
     }    
 }
