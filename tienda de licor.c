@@ -20,7 +20,7 @@ void modificar(Licor producto[]);
 void consultar(Licor producto[], int *tam);
 void consulta_general(Licor producto[], int size);
 void vender(Licor producto[]);
-void comprar(Licor producto[], int serial);
+void comprar(Licor producto[], int tam);
 void calcular_inventario(Licor producto[], int *tam);
 void verificar_stock_bajo(Licor producto[], int *tam);
 
@@ -90,13 +90,13 @@ void switchh(Licor producto[], int *ban,int *serial, int *tam){
         consultar(producto,tam);
         break;
       case 5:
-        //Consulta general
+         consulta_general(producto, *tam);
         break;
       case 6:
         // vender producto
         break;
       case 7:
-        // comprar producto
+         comprar(producto,tam);
         break;
       case 8:
         calcular_inventario(producto,tam);
@@ -255,8 +255,43 @@ void verificar_stock_bajo(Licor producto[], int *tam){
     if (band != 1)
     {
       printf("No hay productos con stock bajo\n\n");
-    }
-    
-  }
-  
+    } 
+  } 
 }
+void consulta_general(Licor producto[], int tam){
+int i;
+   for(i=0;i<=tam;i++){
+    printf("%d: %s - %s - %d", i, producto[i].tipo, producto[i].marca, producto[i].serial);
+  }
+    }
+void comprar(Licor producto[], int tam){
+    printf(" ___________________________________________________________\n");
+    printf("|INGRESA EL NUMERO SERIAL DEL PRODUCTO QUE QUIERAS COMPRAR: |\n");
+    printf("|___________________________________________________________|\n");
+    printf("\n");
+    int i=0,serial,out,band=0, x;
+    do
+    {
+        printf("NO.SERIAL: ");
+        out=scanf("%d", &serial);
+        fflush(stdin);
+        for (i = 0; i < tam; i++)
+        {
+        if(producto[i].serial==serial){
+            band=1;
+            printf("Que cantidad desea comprar? ");
+            scanf("Cantidad: %d", &x);
+            producto[i].cantidad= producto[i].cantidad + x;
+            break;
+        }
+        }
+
+    } while (out != 1);
+    if (band!=1)
+    {
+        printf("\n\nNo se encuentra ese producto\n\n");
+    }
+}
+
+
+
