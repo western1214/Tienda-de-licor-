@@ -165,7 +165,7 @@ void eliminar(Licor producto[], int *tam) {
 }
 
 void modificar(Licor producto[], int tam) {
-  int out, serial, i = 0, band = 0;
+  int serial, i = 0, band = 0;
   if (tam > 0) {
     printf(" _____________________________________________________  \n");
     printf("|  Ingresa el numero serial del producto a modificar  | \n");
@@ -360,18 +360,17 @@ void comprar(Licor producto[], int *tam, int *ser) {
 void leerInt(char *mensaje, int *variable) {
   int salida;
   do {
-    printf("\nIngresa los grados de alcohol que contiene: ");
+    printf("%s", mensaje);
     salida = scanf("%d", variable);
     fflush(stdin); // cleanStdIn
-  } while (salida != 1 );
+  } while (salida != 1 || *variable <= 0);
 }
 
 void leerFloat(char *mensaje, float *variable) {
   int salida;
   do {
-    printf("\nIngresa los grados de alcohol que contiene: ");
+    printf("%s", mensaje);
     salida = scanf("%f", variable);
     fflush(stdin); // cleanStdIn
   } while (salida != 1 || *variable <= 0);
 }
-
