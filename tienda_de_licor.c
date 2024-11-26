@@ -356,6 +356,8 @@ void comprar(Licor producto[], int *tam, int *ser) {
       printf("\n\nNo se encuentra ese producto\n\n");
       agregar(producto, tam, ser);
     }
+  } else {
+   agregar(producto, tam, ser);
   }
 }
 
