@@ -284,20 +284,22 @@ void verificarStockBajo(Licor producto[], int tam) {
              producto[i].cantidad);
       band = 1;
     }
-    if (band != 1) {
-      printf("No hay productos con stock bajo\n\n");
-    }
+  }
+
+  if (band != 1) {
+    printf("No hay productos con stock bajo\n\n");
   }
 }
 
 void consultaGeneral(Licor producto[], int tam) {
-  if (tam == 0) {
+  if (tam > 0) {
+    int i;
+    for (i = 0; i < tam; i++) {
+      printf("Tipo: %s - Marca: %s - SERIAL: %d", producto[i].tipo, producto[i].marca,
+             producto[i].serial);
+    }
+  } else {
     printf("\n\nAun no has agregado ningun producto\n\n");
-  }
-  int i;
-  for (i = 0; i <= tam; i++) {
-    printf("%d: %s - %s - %d", i, producto[i].tipo, producto[i].marca,
-           producto[i].serial);
   }
 }
 
@@ -332,7 +334,7 @@ void vender(Licor producto[], int tam) {
 }
 
 void comprar(Licor producto[], int *tam, int *ser) {
-  if (tam > 0) {
+  if (*tam > 0) {
     printf(" ___________________________________________________________\n");
     printf("|INGRESA EL NUMERO SERIAL DEL PRODUCTO QUE QUIERAS COMPRAR: |\n");
     printf("|___________________________________________________________|\n");
