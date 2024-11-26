@@ -15,10 +15,10 @@ void menu();
 void switchh(Licor producto[],int *ban, int *serial, int *tam);
 void agregar(Licor producto[], int *tam, int *ser);
 void eliminar(Licor producto[], int *tam);
-void modificar(Licor producto[]);
+void modificar(Licor producto[], int tam);
 void consultar(Licor producto[], int *tam);
 void consulta_general(Licor producto[], int size);
-void vender(Licor producto[]);
+void vender(Licor producto[], int *tam);
 void comprar(Licor producto[], int tam);
 void calcular_inventario(Licor producto[], int *tam);
 void verificar_stock_bajo(Licor producto[], int *tam);
@@ -83,7 +83,7 @@ void switchh(Licor producto[], int *ban,int *serial, int *tam){
         eliminar(producto,tam);
         break;
       case 3:
-        // Modificar producto;
+        modificar(producto, *tam);
         break;
       case 4: 
         consultar(producto,tam);
@@ -92,7 +92,7 @@ void switchh(Licor producto[], int *ban,int *serial, int *tam){
          consulta_general(producto, *tam);
         break;
       case 6:
-        // vender producto
+         vender(producto, tam);
         break;
       case 7:
          comprar(producto,tam);
@@ -191,6 +191,56 @@ void eliminar(Licor producto[], int *tam){
 
 }
 
+void modificar(Licor producto[], int tam) {
+    int out, serial, i=0, o, u, t, p, band=0;
+    if(tam>0){
+  printf(" _____________________________________________________  \n");
+  printf("|  Ingresa el numero serial del producto a modificar  | \n");
+  printf("|_____________________________________________________| \n\n");
+  do { 
+
+    printf("NO.SERIAL: ");
+    out=scanf("%d", &serial);
+    fflush(stdin);
+    for (int i = 0; i < tam; i++) {
+      if (producto[i].serial == serial) {
+        band=1;
+        printf("\n\n Tipo: %s Marca: %s Grados: %.2f \n Precio: %.2f $ \n Volumen  del producto: %.2f L \n serial: %d \n cantidad en existencia: %d \n", producto[i].tipo, producto[i].marca, producto[i].grados, producto[i].precio , producto[i].volumen, producto[i].serial, producto[i].cantidad );
+        break;      
+      }
+    }
+            do {
+                printf("\nIngresa los nuevos grados de alcohol que contiene: ");
+                o = scanf("%f", &producto[i].grados);
+                fflush(stdin);
+            } while (o != 1);
+            do {
+                printf("\nIngresa la nueva cantidad de litros del producto: ");
+                u = scanf("%f", &producto[i].volumen);
+                fflush(stdin);
+            } while (u != 1);
+            do {
+                printf("\nIngresa el nuevo precio del producto: ");
+                t = scanf("%f", &producto[i].precio);
+                fflush(stdin);
+            } while (t != 1);
+            do {
+                printf("\nIngresa la nueva cantidad disponible: ");
+                p = scanf("%d", &producto[i].cantidad);
+                fflush(stdin);
+            } while (p != 1);
+
+            printf("\nEl producto se ha modificado exitosamente.\n");
+
+    
+    } while (out != 1);
+  
+    if (band!=1) {
+        printf("\nEl producto no fue encontrado.\n");
+    }
+    }
+}
+
 void consultar(Licor producto[], int *tam){
     printf(" ______________________________________________\n");
     printf("|INGRESA EL NUMERO SERIAL DEL PRODUCTO A BUSCAR|\n");
@@ -263,6 +313,46 @@ int i;
     printf("%d: %s - %s - %d", i, producto[i].tipo, producto[i].marca, producto[i].serial);
   }
     }
+
+void vender(Licor producto[], int *tam){
+  int i=0,serial,out,band=0, x;
+  if(*tam>0){
+
+  printf(" _____________________________________________________  \n");
+  printf("|   Ingresa el numero serial del producto a vender    | \n");
+  printf("|_____________________________________________________| \n\n");
+
+    do
+    {
+        printf("NO.SERIAL: ");
+        out=scanf("%d", &serial);
+        fflush(stdin);
+        for (i = 0; i < *tam; i++)
+        {
+          if(producto[i].serial==serial){
+            band=1;
+            printf("Que cantidad desea vender? ");
+            scanf("Cantidad: %d", &x);
+            if(producto[i].cantidad>=x){
+            producto[i].cantidad= producto[i].cantidad - x;
+            break;
+            }
+          } else {
+            printf("\n\nNo hay suficiente stock para vender\n\n");
+          }
+        }
+
+    } while (out != 1);
+    if (band!=1)
+    {
+        printf("\n\nNo se encuentra ese producto\n\n");
+    }
+  }
+  else{
+    printf("\n\nNo has agregado productos para vender\n\n");
+  }
+}
+
 void comprar(Licor producto[], int tam){
     printf(" ___________________________________________________________\n");
     printf("|INGRESA EL NUMERO SERIAL DEL PRODUCTO QUE QUIERAS COMPRAR: |\n");
