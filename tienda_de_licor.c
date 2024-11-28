@@ -295,12 +295,11 @@ void consultaGeneral(Licor producto[], int tam) {
   if (tam > 0) {
     int i;
     for (i = 0; i < tam; i++) {
-      printf("Producto: %d \n\t- Tipo: %s\t- Marca: %s\t- SERIAL: %d\n", i + 1, producto[i].tipo, producto[i].marca,
-             producto[i].serial);
-    }
+      printf("Producto: %d \n\t- Tipo: %s\t- Marca: %s\t- SERIAL: %d\n", i + 1, producto[i].tipo, producto[i].marca, producto[i].serial);
+    } 
   } else {
     printf("\n\nAun no has agregado ningun producto\n\n");
-  }
+   }
 }
 
 void vender(Licor producto[], int tam) {
