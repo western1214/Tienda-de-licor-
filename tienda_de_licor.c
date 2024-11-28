@@ -19,6 +19,8 @@ void vender(Licor producto[], int tam);
 void comprar(Licor producto[], int *tam, int *ser);
 void calcularInventario(Licor producto[], int tam);
 void verificarStockBajo(Licor producto[], int tam);
+void leerInt(char *mensaje, int *variable);
+void leerFloat(char *mensaje, float *variable);
 
 // Funciones auxiliares
 void menu();
