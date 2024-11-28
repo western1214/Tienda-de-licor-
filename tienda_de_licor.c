@@ -252,18 +252,10 @@ void calcularInventario(Licor producto[], int tam) {
   }
 
   printf("\n");
-  printf(" __________________________________________________________________"
-         "__ \n");
-  printf("|Cuentas con %d unidades                                           "
-         "  |\n",
-         productos);
-  printf("|                                                                  "
-         "  |\n");
-  printf("|El precio total de tu inventario es de $%.2f                      "
-         "  |\n",
-         total);
-  printf("|__________________________________________________________________"
-         "__|\n\n");
+  printf("__________________________________________________________________\n");
+  printf("Cuentas con %d unidades                                           \n\n\n",productos);
+  printf("El precio total de tu inventario es de $%.2f                      \n",total);
+  printf("__________________________________________________________________\n");
 }
 
 void verificarStockBajo(Licor producto[], int tam) {
