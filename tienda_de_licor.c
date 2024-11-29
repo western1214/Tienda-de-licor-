@@ -348,7 +348,7 @@ void comprar(Licor producto[], int *tam, int *ser) {
       agregar(producto, tam, ser);
     }
   } else {
-   printf("\n\nNo has agregado productos\nAgregando uno nuevo\n");
+   printf("\n\nNo has agregado productos\n\nAgregando uno nuevo\n");
    agregar(producto, tam, ser);
   }
 }
