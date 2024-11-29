@@ -30,8 +30,8 @@ int main(){
   Licor producto[50];
   int serial=500,ban=0,tam=0;
   while (ban==0){
-  menu();
-  switchh(producto,&ban,&serial,&tam);
+    menu();
+    switchh(producto,&ban,&serial,&tam);
   }
   return 0;
 }
@@ -165,7 +165,7 @@ void eliminar(Licor producto[], int *tam) {
 }
 
 void modificar(Licor producto[], int tam) {
-  int serial, i = 0, band = 0;
+  int serial, i = 0, band = 0, option;
   if (tam > 0) {
     printf(" _____________________________________________________  \n");
     printf("|  Ingresa el numero serial del producto a modificar  | \n");
@@ -181,28 +181,45 @@ void modificar(Licor producto[], int tam) {
                producto[i].tipo, producto[i].marca, producto[i].grados,
                producto[i].precio, producto[i].volumen, producto[i].serial,
                producto[i].cantidad);
+        leerInt("Que atributo quieres modificar: "
+               "\n1)\tTipo\n2)\tMarca\n3)\tGrados\n4)\tPrecio\n5)\tVolumen\n6)"
+               "\tCantidad\n", &option);
+
+        switch (option) {
+        case 1:
+          printf("\n\nIngresa el tipo del producto: ");
+          fgets(producto[i].tipo, 49, stdin);
+          fflush(stdin); // cleanStdIn
+          break;
+        case 2:
+          printf("\nIngresa la marca del producto: ");
+          fgets(producto[i].marca, 49, stdin);
+          fflush(stdin); // cleanStdIn
+          break;
+        case 3:
+          leerFloat("\nIngresa los grados de alcohol que contiene: ",
+                    &producto[i].grados);
+          break;
+        case 4:
+          leerFloat("\nIngresa de cuantos litros es el producto: ",
+                    &producto[i].volumen);
+          break;
+        case 5:
+          leerFloat("\nIngresa el precio que tendra el articulo: ",
+                    &producto[i].precio);
+          break;
+        case 6:
+          leerInt("\nIngresa cuantos de este tipo vas a agregar: ",
+                  &producto[i].cantidad);
+          break;
+        default:
+          printf("\n\nOpcion no valida!!\n\n");
+        }
+        printf("\nEl producto se ha modificado exitosamente.\n");
+
         break;
       }
     }
-    if (i < tam) {
-      printf("\n\nIngresa el nombre del producto: ");
-      fgets(producto[i].tipo, 49, stdin);
-      fflush(stdin); // cleanStdIn
-      printf("\nIngresa la marca del producto: ");
-      fgets(producto[i].marca, 49, stdin);
-      fflush(stdin); // cleanStdIn
-      leerFloat("\nIngresa los grados de alcohol que contiene: ",
-                &producto[i].grados);
-      leerFloat("\nIngresa de cuantos litros es el producto: ",
-                &producto[i].volumen);
-      leerFloat("\nIngresa el precio que tendra el articulo: ",
-                &producto[i].precio);
-      leerInt("\nIngresa cuantos de este tipo vas a agregar: ",
-              &producto[i].cantidad);
-
-      printf("\nEl producto se ha modificado exitosamente.\n");
-    }
-
     if (band != 1) {
       printf("\nEl producto no fue encontrado.\n");
     }
@@ -259,32 +276,27 @@ void calcularInventario(Licor producto[], int tam) {
 }
 
 void verificarStockBajo(Licor producto[], int tam) {
-  if (tam == 0) {
-    printf("\n\nAun no has agregado ningun producto\n\n");
-  }
+  if (tam > 0) {
+    printf("\n");
+    printf(" ____________________________________________________  \n");
+    printf("|   Productos con stock bajo (menos de 4 unidades)   | \n");
+    printf("|____________________________________________________| \n\n");
+    int i, band;
 
-  printf("\n");
-  printf(" ____________________________________________________  \n");
-  printf("|   Productos con stock bajo (menos de 4 unidades)   | \n");
-  printf("|____________________________________________________| \n\n");
-  int i, band;
-
-  for (i = 0; i < tam; i++) {
-    if (producto[i].cantidad < 4) {
-      printf("Serial: %d\nTipo: %sMarca: %sCantidad: %d\n\n",
-             producto[i].serial, producto[i].tipo, producto[i].marca,
-             producto[i].cantidad);
-      band = 1;
+    for (i = 0; i < tam; i++) {
+      if (producto[i].cantidad < 4) {
+        printf("Serial: %d\nTipo: %sMarca: %sCantidad: %d\n\n",
+               producto[i].serial, producto[i].tipo, producto[i].marca,
+               producto[i].cantidad);
+        band = 1;
+      }
     }
-  }
-  if (tam<=0)
-  {
-    printf("No hay productos\n\n");
-  }else
-  {
+
     if (band != 1) {
-    printf("No hay productos con stock bajo\n\n");
+      printf("No hay productos con stock bajo\n\n");
     }
+  } else {
+    printf("\n\nAun no has agregado ningun producto\n\n");
   }
 }
 
