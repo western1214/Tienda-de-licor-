@@ -277,10 +277,16 @@ void verificarStockBajo(Licor producto[], int tam) {
       band = 1;
     }
   }
-
-  if (band != 1) {
-    printf("No hay productos con stock bajo\n\n");
-  }
+ }
+ if (tam<=0)
+ {
+   printf("No hay productos\n\n");
+ }else
+ {
+    if (band != 1) {
+      printf("No hay productos con stock bajo\n\n");
+    }
+ }
 }
 
 void consultaGeneral(Licor producto[], int tam) {
